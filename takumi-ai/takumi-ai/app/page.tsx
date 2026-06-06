@@ -21,7 +21,7 @@ export default function Home() {
     setMessage("");
   }
   return (
-    <main className="bg-black text-white h-screen">
+    <main className="bg-black text-white h-screen flex flex-col items-center p-6">
       <h1>Takumi AI</h1>
 
       <div className="bg-gray-800 h-96 border border-gray-700 rounded-lg w-full max-w-3xl">
@@ -33,7 +33,7 @@ export default function Home() {
           <p key={index}>{item}</p>
         ))}
       </div>
-      <div className="flex w-full max-w-3xl">
+      <div className="flex w-full max-w-3xl mt-4">
 
       <input 
       value={message}
@@ -41,7 +41,9 @@ export default function Home() {
       className="border border-white  flex-1"
       />
 
-      <button onClick={handleSend}>
+      <button 
+      onClick={handleSend}
+      className="bg-emerald-600 px-4 rounded-lg">
         送信
         </button>
         </div>
