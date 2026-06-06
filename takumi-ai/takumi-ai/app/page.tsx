@@ -7,16 +7,16 @@ export default function Home() {
   const[messages,setMessages] = useState<string[]>([]);
 
   function handleSend(){
-  let aiReply = "";
+  let aiReply = "AI: まだ勉強中です";
 
-  if(massage === "こんにちは"){
+  if(message === "こんにちは"){
     aiReply = "AI: こんにちは！";
   }
 
     setMessages([
       ...messages,
       `あなた: ${message}`,
-      "AI: まだOpenAIには接続していません"
+      aiReply
       ]);
     setMessage("");
   }
@@ -33,17 +33,18 @@ export default function Home() {
           <p key={index}>{item}</p>
         ))}
       </div>
+      <div className="flex w-full max-w-3xl">
 
       <input 
       value={message}
       onChange={(e) => setMessage(e.target.value)}
-      className="border border-white"
+      className="border border-white  flex-1"
       />
-      <p>{message}</p>
 
       <button onClick={handleSend}>
         送信
         </button>
+        </div>
 
     </main>
   );
