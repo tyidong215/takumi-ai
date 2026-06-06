@@ -7,6 +7,12 @@ export default function Home() {
   const[messages,setMessages] = useState<string[]>([]);
 
   function handleSend(){
+  let aiReply = "";
+
+  if(massage === "こんにちは"){
+    aiReply = "AI: こんにちは！";
+  }
+
     setMessages([
       ...messages,
       `あなた: ${message}`,
@@ -27,7 +33,7 @@ export default function Home() {
           <p key={index}>{item}</p>
         ))}
       </div>
-      
+
       <input 
       value={message}
       onChange={(e) => setMessage(e.target.value)}
