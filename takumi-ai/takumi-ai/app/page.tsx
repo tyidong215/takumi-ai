@@ -7,7 +7,11 @@ export default function Home() {
   const[messages,setMessages] = useState<string[]>([]);
 
   function handleSend(){
-    setMessages([...messages,message]);
+    setMessages([
+      ...messages,
+      `あなた: ${message}`,
+      "AI: まだOpenAIには接続していません"
+      ]);
     setMessage("");
   }
   return (
@@ -15,12 +19,15 @@ export default function Home() {
       <h1>Takumi AI</h1>
 
       <div className="bg-gray-800 h-96 border border-gray-700 rounded-lg w-full max-w-3xl">
-        <p>質問を入力してください</p>
+        {messages.length === 0 &&(
+      <p>質問を入力してください</p>
+        )}
+        
         {messages.map((item,index) => (
-          <p key={index}>あなた；{item}</p>
+          <p key={index}>{item}</p>
         ))}
       </div>
-
+      
       <input 
       value={message}
       onChange={(e) => setMessage(e.target.value)}
