@@ -6,18 +6,25 @@ export default function Home() {
   const[message,setMessage] = useState("");
   const[messages,setMessages] = useState<string[]>([]);
 
-  function handleSend(){
-  let aiReply = "AI: まだ勉強中です";
+  async function handleSend(){
+  const response = await fetch("/api/chat",{
+method: "POST",
+    headers:{
+  "content-type":"application/json",
+},
+body: JSON.stringify({
+  message:message,
+}),
+  });
 
-  if(message === "こんにちは"){
-    aiReply = "AI: こんにちは！";
-  }
+  const data = await response.json();
 
-    setMessages([
-      ...messages,
-      `あなた: ${message}`,
-      aiReply
-      ]);
+  setMessages([
+    ...messages,
+    `あなた: ${message}`,
+    `AI: ${data.reply}`
+  ]);
+
     setMessage("");
   }
   return (
