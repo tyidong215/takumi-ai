@@ -6,44 +6,24 @@ export default function Home() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<string[]>([]);
 
-  async function handleSend() {
-    if (message.trim() === "") return;
+function handleSend() {
+  if (message.trim() === "") return;
 
-    const userMessage = message;
+  let aiReply = "AI: まだ勉強中です";
 
-    setMessage("");
+  if (message === "こんにちは") {
+    aiReply = "AI: こんにちは！";
+  }
 
-    try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          message: userMessage,
-        }),
-      });
+  setMessages([
+    ...messages,
+    `あなた: ${message}`,
+    aiReply,
+  ]);
 
-      if (!response.ok) {
-        throw new Error("API Error");
-      }
+  setMessage("");
 
-      const data = await response.json();
 
-      setMessages([
-        ...messages,
-        `あなた: ${userMessage}`,
-        `AI: ${data.reply}`,
-      ]);
-    } catch (error) {
-      setMessages([
-        ...messages,
-        `あなた: ${userMessage}`,
-        "AI: OpenAI APIの利用枠がないため現在は返答できません",
-      ]);
-
-      console.error(error);
-    }
   }
 
   return (
